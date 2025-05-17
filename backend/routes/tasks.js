@@ -23,7 +23,7 @@ router.get('/', verifyToken, async (req, res) => {
 
 router.post('/', verifyToken, async (req, res) => {
   const userId = req.user.id;
-  const { title, description, due_date, status } = req.body;
+  const { title, description, due_date, status, priority } = req.body;
 
   if (!title || !status) {
     return res.status(400).json({ error: 'Title and status are required.' });
@@ -32,7 +32,7 @@ router.post('/', verifyToken, async (req, res) => {
   try {
     await db.query(
       'INSERT INTO tasks (user_id, title, description, due_date, status) VALUES (?, ?, ?, ?, ?)',
-      [userId, title, description || '', due_date || null, status]
+      [userId, title, description || '', due_date || null, status, priority || 'Normal']
     );
 
     res.status(201).json({ message: 'Task created successfully!' });

@@ -1,0 +1,186 @@
+.dashboard-container {
+  max-width: 100%;
+  padding: 20px 40px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+/* TASK FORM */
+.dashboard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.dashboard-form input,
+.dashboard-form select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.dashboard-form button {
+  padding: 10px;
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.dashboard-form button:hover {
+  background-color: black;
+  color: yellow;
+}
+
+/* TASK DISPLAY */
+.task-item {
+  border: 1px solid #bbb;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  background: transparent;
+}
+
+.task-item .title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.task-item .status {
+  font-style: italic;
+  color: gray;
+  margin-bottom: 5px;
+}
+
+.task-item .description {
+  margin-top: 4px;
+}
+
+.task-item .due {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* OVERLAY */
+.task-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+}
+
+.close-form {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* TOP ROW */
+.dashboard-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.new-task-button {
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 1.5rem 2.25rem; /* made bigger */
+  font-size: 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  height: fit-content;
+}
+
+.priority-row {
+  display: flex;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.priority-row > div {
+  border: 1.5px solid #aaa;
+  padding: 1rem;
+  border-radius: 6px;
+  flex: 1;
+  background: transparent;
+  min-height: 450px; /* ⬅️ made it 1.5x taller */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.priority-row h4 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* WEEK NAVIGATION */
+.week-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.week-navigation button {
+  padding: 6px 12px;
+  font-weight: bold;
+  background: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* WEEKLY VIEW */
+.weekly-view.horizontal-week {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  height: calc(100vh - 450px); /* ⬅️ fills remaining screen below top section */
+}
+
+.day-card {
+  flex: 1;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  padding: 0.75rem;
+  background: transparent;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}

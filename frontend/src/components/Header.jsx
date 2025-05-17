@@ -5,18 +5,19 @@ import './Header.css';
 function Header() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const location = useLocation();
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    setDropdownOpen(false);
+  }, [location]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
-
-  const location = useLocation();
-    useEffect(() => {
-    setDropdownOpen(false);  // Close dropdown on route change
-  }, [location]);
-
 
   const handleDeleteAccount = async () => {
     const confirmed = window.confirm('Are you sure you want to delete your account? This cannot be undone.');
@@ -41,11 +42,12 @@ function Header() {
   };
 
   const handleThemeChange = () => {
-    console.log('Theme change clicked');
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setDropdownOpen(false);
   };
 
   return (
-    <header className="header">
+    <header className={`header ${theme}`}>
       <div className="header-container">
         <span className="header-title">Taskinator</span>
         <nav className="header-nav">
