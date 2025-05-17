@@ -1,0 +1,60 @@
+/* Header.css */
+
+.header {
+  background-color: yellow;
+  padding: 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Increased spacing */
+}
+
+.header-nav a,
+.header-nav button {
+  background-color: black;
+  color: yellow;
+  padding: 12px 18px;         /* Larger button size */
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;            /* 1.5x bigger */
+  cursor: pointer;
+}
+
+.gear {
+  margin-left: 12px;
+  cursor: pointer;
+  font-size: 38px;            /* 3x bigger than before */
+}
+
+.dropdown-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: black;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 999;
+}

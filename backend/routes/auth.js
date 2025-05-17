@@ -16,29 +16,30 @@ router.post('/register', async (req, res) => {
   }
 
   try {
-    //  Check if email already exists
-    const [existingUser] = await db.query(
-      'SELECT id FROM users WHERE email = ?',
-      [email]
-    );
-
+    const [existingUser] = await db.query('SELECT id FROM users WHERE email = ?', [email]);
     if (existingUser.length > 0) {
       return res.status(409).json({ error: 'Email already in use.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log('Hashed password:', hashedPassword);
 
-    await db.query(
-        'INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)',
-        [username, email, hashedPassword]
+    const [result] = await db.query(
+      'INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)',
+      [username, email, hashedPassword]
     );
 
-    res.status(201).json({ message: 'User registered successfully!' });
+    const userId = result.insertId;
 
+    const token = jwt.sign(
+      { id: userId, username },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    res.status(201).json({ message: 'User registered successfully!', token });
   } catch (err) {
-    console.error('DB error:', err);
-    res.status(500).json({ error: 'Server error checking email.' });
+    console.error('Register error:', err);
+    res.status(500).json({ error: 'Server error during registration.' });
   }
 });
 
@@ -96,19 +97,15 @@ router.get('/protected', verifyToken, (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.delete('/users/me', verifyToken, async (req, res) => {
+  try {
+    await db.query('DELETE FROM users WHERE id = ?', [req.user.id]);
+    res.json({ message: 'User account deleted successfully.' });
+  } catch (err) {
+    console.error('Delete user error:', err);
+    res.status(500).json({ error: 'Server error deleting user.' });
+  }
+});
 
 
 
