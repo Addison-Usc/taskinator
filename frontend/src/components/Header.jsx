@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -11,6 +11,12 @@ function Header() {
     localStorage.removeItem('token');
     navigate('/login');
   };
+
+  const location = useLocation();
+    useEffect(() => {
+    setDropdownOpen(false);  // Close dropdown on route change
+  }, [location]);
+
 
   const handleDeleteAccount = async () => {
     const confirmed = window.confirm('Are you sure you want to delete your account? This cannot be undone.');
