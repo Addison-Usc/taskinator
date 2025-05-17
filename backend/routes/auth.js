@@ -96,19 +96,15 @@ router.get('/protected', verifyToken, (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.delete('/users/me', verifyToken, async (req, res) => {
+  try {
+    await db.query('DELETE FROM users WHERE id = ?', [req.user.id]);
+    res.json({ message: 'User account deleted successfully.' });
+  } catch (err) {
+    console.error('Delete user error:', err);
+    res.status(500).json({ error: 'Server error deleting user.' });
+  }
+});
 
 
 
