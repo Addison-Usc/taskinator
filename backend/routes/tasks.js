@@ -31,9 +31,9 @@ router.post('/', verifyToken, async (req, res) => {
 
   try {
     await db.query(
-      'INSERT INTO tasks (user_id, title, description, due_date, status) VALUES (?, ?, ?, ?, ?)',
-      [userId, title, description || '', due_date || null, status, priority || 'Normal']
-    );
+  'INSERT INTO tasks (user_id, title, description, due_date, status, priority) VALUES (?, ?, ?, ?, ?, ?)',
+  [userId, title, description || '', due_date || null, status, priority || 'Normal']
+);
 
     res.status(201).json({ message: 'Task created successfully!' });
   } catch (err) {
@@ -46,12 +46,12 @@ router.post('/', verifyToken, async (req, res) => {
 router.put('/:id', verifyToken, async (req, res) => {
   const userId = req.user.id;
   const taskId = req.params.id;
-  const { title, description, due_date, status } = req.body;
+  const { title, description, due_date, status, priority } = req.body; 
 
   try {
     const [result] = await db.query(
-      'UPDATE tasks SET title = ?, description = ?, due_date = ?, status = ? WHERE id = ? AND user_id = ?',
-      [title, description, due_date, status, taskId, userId]
+      'UPDATE tasks SET title = ?, description = ?, due_date = ?, status = ?, priority = ? WHERE id = ? AND user_id = ?',
+      [title, description, due_date, status, priority, taskId, userId] 
     );
 
     if (result.affectedRows === 0) {
@@ -64,6 +64,7 @@ router.put('/:id', verifyToken, async (req, res) => {
     res.status(500).json({ error: 'Server error updating task' });
   }
 });
+
 
 
 

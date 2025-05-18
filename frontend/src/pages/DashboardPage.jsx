@@ -4,13 +4,12 @@ import TaskCard from '../components/TaskCard';
 import './DashboardPage.css';
 
 function DashboardPage() {
-  // State to hold tasks, form visibility, flash message, and week offset
   const [tasks, setTasks] = useState([]);
   const [message, setMessage] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
+  const [showAllPriority, setShowAllPriority] = useState({ High: false, Normal: false, Low: false });
 
-  // Fetch tasks on initial load
   useEffect(() => {
     const fetchTasks = async () => {
       try {
@@ -20,8 +19,11 @@ function DashboardPage() {
           }
         });
         const data = await res.json();
-        // Defensive fallback if no data
-        setTasks(Array.isArray(data.tasks) ? data.tasks : []);
+        if (Array.isArray(data.tasks)) {
+          setTasks(data.tasks);
+        } else {
+          console.error("Tasks is not an array", data);
+        }
       } catch (err) {
         console.error('Failed to fetch tasks:', err);
         setTasks([]);
@@ -30,7 +32,6 @@ function DashboardPage() {
     fetchTasks();
   }, []);
 
-  // Task creation handler
   const handleCreateTask = async (taskData) => {
     const res = await fetch('http://localhost:3001/api/tasks', {
       method: 'POST',
@@ -50,7 +51,6 @@ function DashboardPage() {
     }
   };
 
-  // Get dates for current week
   const startOfWeek = new Date();
   startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + currentWeekOffset * 7);
 
@@ -60,41 +60,46 @@ function DashboardPage() {
     return date;
   });
 
-  // Filter tasks by priority
-  const groupedByPriority = (level) =>
+  const groupedByPriority = (level, showAll = false) =>
     tasks
       .filter(task => task.priority === level)
-      .sort((a, b) => new Date(a.due_date) - new Date(b.due_date))
-      .slice(0, 5);
+      .sort((a, b) => {
+        const aDate = a.due_date ? new Date(a.due_date) : Infinity;
+        const bDate = b.due_date ? new Date(b.due_date) : Infinity;
+        return aDate - bDate;
+      })
+      .slice(0, showAll ? undefined : 5);
 
-  // Filter tasks by due date
   const tasksByDate = (date) => {
-    const dayStr = date.toISOString().split('T')[0];
-    return tasks.filter(task => task.due_date && task.due_date.startsWith(dayStr));
+  const dayStr = date.toLocaleDateString('en-CA');
+  return tasks.filter(task => task.due_date && task.due_date.startsWith(dayStr));
+};
+
+  const toggleShowAll = (level) => {
+    setShowAllPriority(prev => ({ ...prev, [level]: !prev[level] }));
   };
 
   return (
     <div className="dashboard-container">
-      {/* Top section with button and priority views */}
       <div className="dashboard-top">
         <button className="new-task-button" onClick={() => setShowForm(true)}>+ New Task</button>
         <div className="priority-row">
-          <div className="priority-box">
-            <h4 className="priority-label">High Priority</h4>
-            {groupedByPriority('High').map((task, i) => <TaskCard key={i} task={task} />)}
-          </div>
-          <div className="priority-box">
-            <h4 className="priority-label">Normal Priority</h4>
-            {groupedByPriority('Normal').map((task, i) => <TaskCard key={i} task={task} />)}
-          </div>
-          <div className="priority-box">
-            <h4 className="priority-label">Low Priority</h4>
-            {groupedByPriority('Low').map((task, i) => <TaskCard key={i} task={task} />)}
-          </div>
+          {['High', 'Normal', 'Low'].map(level => (
+            <div key={level} className="priority-box">
+              <h4 className="priority-label">{level} Priority</h4>
+              {groupedByPriority(level, showAllPriority[level]).map((task, i) => (
+                <TaskCard key={i} task={task} showPriority={false} />
+              ))}
+              {groupedByPriority(level, true).length > 5 && (
+                <button className="show-more-button" onClick={() => toggleShowAll(level)}>
+                  {showAllPriority[level] ? 'Show Less' : 'Show More'}
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Pop-up form overlay */}
       {showForm && (
         <div className="task-form-overlay">
           <div className="overlay-content">
@@ -104,19 +109,19 @@ function DashboardPage() {
         </div>
       )}
 
-      {/* Week navigation controls */}
       <div className="week-navigation">
         <button onClick={() => setCurrentWeekOffset(prev => prev - 1)}>&lt; Prev</button>
         <span>Week of {weekDays[0].toDateString()}</span>
         <button onClick={() => setCurrentWeekOffset(prev => prev + 1)}>Next &gt;</button>
       </div>
 
-      {/* Horizontal day cards view */}
       <div className="weekly-view horizontal-week">
         {weekDays.map((date, idx) => (
           <div key={idx} className="day-card">
             <h5>{date.toDateString().slice(0, 10)}</h5>
-            {tasksByDate(date).map((task, i) => <TaskCard key={i} task={task} />)}
+            {tasksByDate(date).map((task, i) => (
+              <TaskCard key={i} task={task} showDate={false} />
+            ))}
           </div>
         ))}
       </div>
