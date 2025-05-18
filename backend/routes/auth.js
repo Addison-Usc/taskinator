@@ -6,8 +6,6 @@ const jwt = require('jsonwebtoken');
 const verifyToken = require('../authMiddleware');
 
 
-
-
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -89,12 +87,17 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.get('/protected', verifyToken, (req, res) => {
-  res.json({
-    message: 'You accessed a protected route!',
-    user: req.user // this contains the decoded token
-  });
+router.get('/protected', verifyToken, async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT id, username, email FROM users WHERE id = ?', [req.user.id]);
+    if (rows.length === 0) return res.status(404).json({ error: 'User not found' });
+
+    res.json({ user: rows[0] });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
 });
+
 
 
 router.delete('/users/me', verifyToken, async (req, res) => {
@@ -106,6 +109,51 @@ router.delete('/users/me', verifyToken, async (req, res) => {
     res.status(500).json({ error: 'Server error deleting user.' });
   }
 });
+
+router.put('/users/me', verifyToken, async (req, res) => {
+  const { username, email, password } = req.body;
+  const updates = [];
+  const values = [];
+
+  if (username) {
+    updates.push('username = ?');
+    values.push(username);
+  }
+
+  if (email) {
+    updates.push('email = ?');
+    values.push(email);
+  }
+
+  if (password) {
+    const hashed = await bcrypt.hash(password, 10);
+    updates.push('password_hash = ?');
+    values.push(hashed);
+  }
+
+  if (updates.length === 0) {
+    return res.status(400).json({ error: 'No fields to update' });
+  }
+
+  values.push(req.user.id); 
+
+  try {
+    await db.query(
+      `UPDATE users SET ${updates.join(', ')} WHERE id = ?`,
+      values
+    );
+    res.json({ message: 'User updated successfully' });
+  } catch (err) {
+    console.error('Update error:', err);
+    res.status(500).json({ error: 'Failed to update user' });
+  }
+});
+
+
+
+
+
+
 
 
 
