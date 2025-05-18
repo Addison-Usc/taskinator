@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-/* TASK FORM */
+
 .dashboard-form {
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
   color: yellow;
 }
 
-/* TASK DISPLAY */
+
 .task-item {
   border: 1px solid #bbb;
   padding: 12px;
@@ -90,7 +90,7 @@
 }
 
 
-/* OVERLAY */
+
 .task-form-overlay {
   position: fixed;
   top: 0;
@@ -125,7 +125,7 @@
   cursor: pointer;
 }
 
-/* TOP ROW */
+
 .dashboard-top {
   display: flex;
   align-items: flex-start;
@@ -138,7 +138,7 @@
   color: black;
   font-weight: bold;
   border: none;
-  padding: 1.5rem 2.25rem; /* made bigger */
+  padding: 1.5rem 2.25rem; 
   font-size: 1.2rem;
   border-radius: 6px;
   cursor: pointer;
@@ -171,7 +171,7 @@
   margin-bottom: 0.75rem;
 }
 
-/* WEEK NAVIGATION */
+
 .week-navigation {
   display: flex;
   align-items: center;
@@ -188,13 +188,13 @@
   cursor: pointer;
 }
 
-/* WEEKLY VIEW */
+
 .weekly-view.horizontal-week {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin-top: 1.5rem;
-  height: calc(100vh - 450px); /* ⬅️ fills remaining screen below top section */
+  height: calc(100vh - 450px); 
 }
 
 .day-card {
