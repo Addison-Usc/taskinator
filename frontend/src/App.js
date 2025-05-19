@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
-import AccountPage from './pages/AccountPage'; // ✅ import it at the top
+import AccountPage from './pages/AccountPage'; 
+
 import Header from './components/Header';
 
 function App() {

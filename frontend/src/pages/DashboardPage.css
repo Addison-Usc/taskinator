@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-
 .dashboard-form {
   display: flex;
   flex-direction: column;
@@ -36,7 +35,6 @@
   background-color: black;
   color: yellow;
 }
-
 
 .task-item {
   border: 1px solid #bbb;
@@ -74,7 +72,7 @@
   border-radius: 50%;
   position: absolute;
   top: 8px;
-  right: 8px; 
+  right: 8px;
 }
 
 .status-dot.todo {
@@ -89,7 +87,27 @@
   background-color: green;
 }
 
+.task-actions {
+  position: absolute;
+  top: 24px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
+.task-actions button {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  color: #555;
+}
+
+.task-actions button:hover {
+  color: red;
+}
 
 .task-form-overlay {
   position: fixed;
@@ -125,7 +143,6 @@
   cursor: pointer;
 }
 
-
 .dashboard-top {
   display: flex;
   align-items: flex-start;
@@ -138,12 +155,13 @@
   color: black;
   font-weight: bold;
   border: none;
-  padding: 1.5rem 2.25rem; 
+  padding: 1.5rem 2.25rem;
   font-size: 1.2rem;
   border-radius: 6px;
   cursor: pointer;
   height: fit-content;
 }
+
 
 .priority-row {
   display: flex;
@@ -160,7 +178,7 @@
   min-height: 450px;
   display: flex;
   flex-direction: column;
-  align-items: stretch; 
+  align-items: stretch;
   gap: 12px;
 }
 
@@ -194,7 +212,7 @@
   justify-content: space-between;
   gap: 1rem;
   margin-top: 1.5rem;
-  height: calc(100vh - 450px); 
+  height: calc(100vh - 450px);
 }
 
 .day-card {
@@ -221,3 +239,10 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+
+.task-card-container {
+  position: relative;
+  margin-bottom: 12px;
+}
+

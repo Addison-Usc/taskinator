@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../components/AuthForm.css';
 
 function AccountPage() {
   const [form, setForm] = useState({
@@ -47,7 +48,7 @@ function AccountPage() {
   };
 
   return (
-    <div>
+    <div className="auth-container">
       <h2>Edit Account</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -55,20 +56,20 @@ function AccountPage() {
           placeholder="Username"
           value={form.username}
           onChange={handleChange}
-        /><br/>
+        />
         <input
           name="email"
           placeholder="New Email"
           value={form.email}
           onChange={handleChange}
-        /><br/>
+        />
         <input
           name="password"
           type="password"
-          placeholder="New Password"
+          placeholder="New Password (leave blank to keep the same)"
           value={form.password}
           onChange={handleChange}
-        /><br/>
+        />
         <button type="submit">Save Changes</button>
       </form>
       {message && <p>{message}</p>}
