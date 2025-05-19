@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AuthForm.css';
 
 function AuthForm({ mode }) {
   const navigate = useNavigate();
@@ -38,6 +39,8 @@ function AuthForm({ mode }) {
   };
 
   return (
+  <>
+    <h2>{mode === 'login' ? 'Login' : 'Register'}</h2>
     <form onSubmit={handleSubmit}>
       {mode === 'register' && (
         <input
@@ -64,7 +67,8 @@ function AuthForm({ mode }) {
         {mode === 'login' ? 'Login' : 'Register'}
       </button>
     </form>
-  );
+  </>
+);
 }
 
 export default AuthForm;

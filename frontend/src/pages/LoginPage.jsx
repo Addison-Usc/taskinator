@@ -1,16 +1,19 @@
 import React from 'react';
 import AuthForm from '../components/AuthForm';
 import { Link } from 'react-router-dom';
+import '../components/AuthForm.css';
 
 function LoginPage() {
   return (
-    <div>
-      <h2>Login</h2>
-      <AuthForm mode="login" />
-      <p>
-         Don't have an account? <Link to="/register">Register here</Link>
+    <>
+      <div className="auth-container">
+        <AuthForm mode="login" />
+      </div>
+      <p className="auth-link">
+        Don’t have an account? <Link to="/register">Register here</Link>
       </p>
-    </div>
+    </>
   );
 }
+
 export default LoginPage;

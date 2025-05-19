@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-function TaskForm({ onSubmit }) {
+function TaskForm({ onSubmit, initialData = {}, submitText = 'Add Task' }) {
   const [form, setForm] = useState({
-    title: '',
-    description: '',
-    due_date: '',
-    status: 'todo',
-    priority: 'Normal'
-  });
+  title: initialData.title || '',
+  description: initialData.description || '',
+  due_date: initialData.due_date ? initialData.due_date.split('T')[0] : '', 
+  status: initialData.status || 'todo',
+  priority: initialData.priority || 'Normal',
+});
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,7 +15,10 @@ function TaskForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(form);
+    const payload = { ...form };
+    if (!payload.due_date) delete payload.due_date;
+
+    onSubmit(payload);
     setForm({ title: '', description: '', due_date: '', status: 'todo', priority: 'Normal' });
   };
 
@@ -37,7 +40,7 @@ function TaskForm({ onSubmit }) {
         <option value="Normal">Normal</option>
         <option value="Low">Low</option>
       </select>
-      <button type="submit">Add Task</button>
+      <button type="submit">{submitText}</button>
     </form>
   );
 }
