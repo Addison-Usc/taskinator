@@ -29,7 +29,7 @@ Git (if cloning the repo)
 
 
 ### Step 1: Clone the Repo and Navigate to Backend
-git clone https://github.com/your-username/taskinator.git
+git clone https://github.com/Addison-Usc/taskinator.git
 cd taskinator/backend
 
 ### Step 2: Create the MySQL Database
@@ -49,7 +49,7 @@ mysql -u root -p taskinator < seed.sql
 ### Step 5: Set Up the .env File, see env.example for template
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=       # leave blank or use your MySQL pass
+DB_PASSWORD=       ## leave blank or use your MySQL pass
 DB_NAME=taskinator
 JWT_SECRET=superSecretKey
 
