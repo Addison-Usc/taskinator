@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Stablishes and exports a connection pool to the database using mysql2.
+ */
+
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 

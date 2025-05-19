@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Displays individual task details and includes buttons for editing or deleting the task.
+ */
+
 import React from 'react';
 
 function TaskCard({

@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Handles user registration, login, and token-based authentication logic.
+ */
+
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); 
@@ -148,8 +153,6 @@ router.put('/users/me', verifyToken, async (req, res) => {
     res.status(500).json({ error: 'Failed to update user' });
   }
 });
-
-
 
 
 

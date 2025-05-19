@@ -1,14 +1,18 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Navigation header component.
+ */
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 
-function Header() {
+function Header({ theme, setTheme }) {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const location = useLocation();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     setDropdownOpen(false);
@@ -42,32 +46,41 @@ function Header() {
   };
 
   const handleThemeChange = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+   setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
     setDropdownOpen(false);
-  };
+    };
 
   return (
     <header className={`header ${theme}`}>
       <div className="header-container">
         <span className="header-title">Taskinator</span>
         <nav className="header-nav">
-          <Link to="/dashboard">Dashboard</Link>
-          {token ? (
-            <div className="dropdown-wrapper">
-              <Link to="/account">Account</Link>
-              <span className="gear" onClick={() => setDropdownOpen(!dropdownOpen)}>⚙️</span>
-              {dropdownOpen && (
-                <div className="dropdown-menu">
-                  <button onClick={handleThemeChange}>Change Theme</button>
-                  <button onClick={handleLogout}>Logout</button>
-                  <button onClick={handleDeleteAccount}>Delete Account</button>
+            <Link to="/dashboard">Dashboard</Link>
+
+            {token ? (
+                <div className="dropdown-wrapper">
+                <Link to="/account">Account</Link>
+                <span className="gear" onClick={() => setDropdownOpen(!dropdownOpen)}>⚙️</span>
+                {dropdownOpen && (
+                    <div className="dropdown-menu">
+                    <button onClick={handleThemeChange}>Change Theme</button>
+                    <button onClick={handleLogout}>Logout</button>
+                    <button onClick={handleDeleteAccount}>Delete Account</button>
+                    </div>
+                )}
                 </div>
-              )}
-            </div>
-          ) : (
-            <Link to="/login">Login / Register</Link>
-          )}
-        </nav>
+            ) : (
+                <div className="dropdown-wrapper">
+                <Link to="/login">Login / Register</Link>
+                <span className="gear" onClick={() => setDropdownOpen(!dropdownOpen)}>⚙️</span>
+                {dropdownOpen && (
+                    <div className="dropdown-menu">
+                    <button onClick={handleThemeChange}>Change Theme</button>
+                    </div>
+                )}
+                </div>
+            )}
+         </nav>
       </div>
     </header>
   );

@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Full-screen modal that shows task details and includes AddComment and CommentList components.
+ */
+
 import React from 'react';
 import CommentList from './CommentList';
 import AddComment from './AddComment';
