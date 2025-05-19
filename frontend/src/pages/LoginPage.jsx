@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Login page that renders the AuthForm in login mode, provides register page link.
+ */
+
 import React from 'react';
 import AuthForm from '../components/AuthForm';
 import { Link } from 'react-router-dom';

@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Main dashboard view for Taskinator. Displays task form and tasks by priority/week.
+ */
+
 import React, { useEffect, useState } from 'react';
 import TaskForm from '../components/TaskForm';
 import TaskCard from '../components/TaskCard';
@@ -49,6 +54,8 @@ function DashboardPage() {
       },
       body: JSON.stringify(taskData)
     });
+
+    fetchTasks();
 
     const data = await res.json();
     setMessage(data.message || data.error);

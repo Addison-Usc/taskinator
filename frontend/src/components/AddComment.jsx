@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Text input form for submitting new comments to the backend.
+ */
+
 import React, { useState } from 'react';
 
 function AddComment({ taskId, onCommentAdded }) {

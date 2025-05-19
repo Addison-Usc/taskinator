@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Modal for editing existing tasks. Allows updates to task details and sends them to the backend.
+ */
+
 import React from 'react';
 import TaskForm from './TaskForm';
 

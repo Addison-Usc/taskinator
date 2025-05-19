@@ -1,3 +1,7 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Handles comment creation, retrieval, and deletion for tasks
+*/
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); 

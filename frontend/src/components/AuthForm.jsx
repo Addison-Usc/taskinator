@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Shared form component used by both login and registration pages to handle user input and submission.
+ */
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AuthForm.css';

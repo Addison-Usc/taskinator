@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Fetches and displays all comments related to a task.
+ */
+
 import React, { useEffect, useState } from 'react';
 
 function CommentList({ taskId }) {

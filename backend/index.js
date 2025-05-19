@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Main backend entry point. Sets up Express, middleware, and routes.
+ */
+
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();

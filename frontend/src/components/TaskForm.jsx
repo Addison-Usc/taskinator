@@ -1,3 +1,7 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- UI component for creating new tasks and submitting them to the backend.
+ */
 import React, { useState } from 'react';
 
 function TaskForm({ onSubmit, initialData = {}, submitText = 'Add Task' }) {

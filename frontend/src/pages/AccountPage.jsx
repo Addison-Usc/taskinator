@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * -- Allows users to view and update their account info.
+ */
+
 import React, { useEffect, useState } from 'react';
 import '../components/AuthForm.css';
 

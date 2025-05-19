@@ -1,3 +1,8 @@
+/**
+ * Author: Addison Uscinowicz
+ * --Middleware to verify JWT tokens and authenticate protected routes.
+ */
+
 const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next) {
