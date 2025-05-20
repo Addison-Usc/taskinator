@@ -125,12 +125,18 @@
 
 .overlay-content {
   background: white;
+  color: black;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
   width: 90%;
   max-width: 500px;
+}
+
+body.dark .overlay-content {
+  background: #2a2a2a;
+  color: white;
 }
 
 .close-form {
@@ -246,3 +252,20 @@
   margin-bottom: 12px;
 }
 
+body.dark .dashboard-form label,
+body.dark .priority-label,
+body.dark .task-item .status,
+body.dark .task-item .due,
+body.dark .day-card h5 {
+  color: white;
+}
+
+body.dark .dashboard-form button {
+  background-color: yellow;
+  color: black;
+}
+
+body.dark .dashboard-form button:hover {
+  background-color:black;
+  color: yellow;
+}

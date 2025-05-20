@@ -109,8 +109,7 @@ body.dark .auth-container button:hover {
   color: #fff;
 }
 
-.auth-link a, .switch-link a {
-  color: #007bff; /* Blue */
+.auth-link a, .switch-link a { 
   text-decoration: none;
   font-weight: bold;
 }

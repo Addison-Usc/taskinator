@@ -58,3 +58,26 @@
 .task-info p {
   margin: 0.25rem 0;
 }
+
+body.dark .comment-modal-content {
+  background: #2a2a2a;
+  color: white;
+}
+
+body.dark .comment-modal-content h3,
+body.dark .comment-modal-content p {
+  color: white;
+}
+
+body.dark .comment-link-button,
+body.dark button[type="submit"] {
+  color: #007bff;
+  border: none;
+}
+
+body.dark .comment-link-button:hover,
+
+
+body.dark .close-modal-button {
+  color: white;
+}

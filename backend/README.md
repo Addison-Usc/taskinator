@@ -39,7 +39,7 @@ CREATE DATABASE taskinator;
 EXIT;
 
 
-### Step 3: Run the Schema Script
+### Step 3: Run the Schema Script 
 mysql -u root -p taskinator < schema.sql
 
 
