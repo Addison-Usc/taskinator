@@ -19,4 +19,8 @@ Taskinator is a full-stack task management app designed for organized task plann
 - Database: MySQL
 - Auth: JWT (JSON Web Token)
 
+# Launch Instructions
+
+- View the recpective README files in both /frontend and /backend
+
 
